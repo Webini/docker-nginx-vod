@@ -1,11 +1,10 @@
 FROM debian:jessie
 
-ENV VOD_VERSION 1.10
-ENV NGINX_VERSION 1.11.6
-ENV OPENSSL_VERSION 1.0.2f
+ENV VOD_VERSION 1.12
+ENV NGINX_VERSION 1.11.8
 
 RUN apt-get update && \
-    apt-get install -y --force-yes build-essential wget zip libpcre3-dev zlib1g-dev libxml2-dev libxslt1-dev libgd-dev libgeoip-dev libperl-dev && \
+    apt-get install -y --force-yes build-essential wget zip libpcre3-dev zlib1g-dev libxml2-dev libxslt1-dev libgd-dev libgeoip-dev libperl-dev libssl-dev && \
     apt-get clean
 
 RUN addgroup --system nginx &&  \
@@ -15,9 +14,7 @@ RUN addgroup --system nginx &&  \
 RUN cd /var/tmp/install && \
     wget https://github.com/kaltura/nginx-vod-module/archive/$VOD_VERSION.zip && \
     wget https://nginx.org/download/nginx-$NGINX_VERSION.tar.gz && \
-    wget http://www.openssl.org/source/openssl-$OPENSSL_VERSION.tar.gz && \
     tar -xzvf nginx-$NGINX_VERSION.tar.gz && \
-    tar -xzvf openssl-$OPENSSL_VERSION.tar.gz && \
     unzip $VOD_VERSION.zip
     
 RUN cd /var/tmp/install/nginx-$NGINX_VERSION && \
@@ -66,7 +63,7 @@ RUN cd /var/tmp/install/nginx-$NGINX_VERSION && \
                 --with-compat \
                 --with-file-aio \
                 --with-http_v2_module \
-                --with-openssl=/var/tmp/install/openssl-$OPENSSL_VERSION/\
+                --with-cc-opt="-O3" \
                 --add-module=/var/tmp/install/nginx-vod-module-$VOD_VERSION && \
     make && \
     make install
