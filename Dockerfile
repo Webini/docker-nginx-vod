@@ -1,7 +1,7 @@
 FROM debian:jessie
 
-ENV VOD_VERSION 1.12
-ENV NGINX_VERSION 1.11.8
+ENV VOD_VERSION 1.15
+ENV NGINX_VERSION 1.11.13
 
 RUN apt-get update && \
     apt-get install -y --force-yes build-essential wget zip libpcre3-dev zlib1g-dev libxml2-dev libxslt1-dev libgd-dev libgeoip-dev libperl-dev libssl-dev && \
