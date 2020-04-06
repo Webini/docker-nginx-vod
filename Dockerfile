@@ -1,7 +1,7 @@
-FROM debian:jessie
+FROM debian:stretch
 
-ENV VOD_VERSION 1.19
-ENV NGINX_VERSION 1.12.1
+ENV VOD_VERSION 1.25
+ENV NGINX_VERSION 1.17.9
 
 RUN apt-get update && \
     apt-get install -y --force-yes build-essential wget zip libpcre3-dev zlib1g-dev libxml2-dev libxslt1-dev libgd-dev libgeoip-dev libperl-dev libssl-dev && \
@@ -75,6 +75,6 @@ RUN ln -sf /dev/stdout /var/log/nginx/access.log && \
 COPY nginx.conf /etc/nginx/nginx.conf
 COPY nginx.vh.default.conf /etc/nginx/conf.d/default.conf
 
-EXPOSE 80 443
+EXPOSE 80
 
 CMD ["nginx", "-g", "daemon off;"]
