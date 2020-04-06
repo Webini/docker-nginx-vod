@@ -4,7 +4,7 @@ ENV VOD_VERSION 1.25
 ENV NGINX_VERSION 1.17.9
 
 RUN apt-get update && \
-    apt-get install -y --force-yes build-essential wget zip libpcre3-dev zlib1g-dev libxml2-dev libxslt1-dev libgd-dev libgeoip-dev libperl-dev libssl-dev && \
+    apt-get install -y --force-yes build-essential gettext-base wget zip libpcre3-dev zlib1g-dev libxml2-dev libxslt1-dev libgd-dev libgeoip-dev libperl-dev libssl-dev && \
     apt-get clean
 
 RUN addgroup --system nginx &&  \
